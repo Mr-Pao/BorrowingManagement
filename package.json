@@ -1,0 +1,16 @@
+{
+  "name": "miniprogram",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.10.2",
+    "uview-ui": "^2.0.30",
+    "weui-miniprogram": "^1.0.8"
+  },
+  "description": "这是使用云开发能力构建的待办事项小程序模板，其中演示了云开发三大基础能力的使用："
+}

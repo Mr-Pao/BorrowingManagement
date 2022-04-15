@@ -1,0 +1,79 @@
+<!--pages/index/index.wxml-->
+
+<!-- UserInfo -->
+<view class="userInfo">
+    <view wx:if="{{!hasUserInfo}}" style="margin: auto;">
+        <button bindtap="getUserProfile" type="default"> 登记信息 </button>
+    </view>
+    <block wx:else>
+        <image class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+        <text class="userInfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+</view>
+
+<!-- BorrowList -->
+<block wx:if="{{hasUserInfo&&hasMyBorrow}}">
+    <view class="myList" wx:if="{{hasUserInfo&&hasMyBorrow}}">
+        <view class="myList_title">
+            <view class="myList_title_text">我的借用</view>
+            <view class="myList_title_more">查看更多></view>
+        </view>
+        <view class="myList_cell">
+            <van-cell-group inset>
+                <view wx:for="{{myBorrow}}" wx:for-index="index" wx:if="{{item.borrow==1&&item.return==0}}" id="{{index}}" bindtap="goToReturn">
+                    <van-cell icon="star-o" size="large" is-link title="{{item.borrowList[0].title}}" value="{{item.borrowTime}}" />
+                </view>
+            </van-cell-group>
+        </view>
+    </view>
+    <view class="refresh" wx:else>请下拉刷新</view>
+</block>
+
+<!-- 以下为管理者界面 -->
+<!-- 借用申请 -->
+<block class="myList" wx:if="{{isManager}}">
+    <view class="myList_title">
+        <view class="myList_title_text">借用申请</view>
+        <view class="myList_title_more">查看更多></view>
+    </view>
+    <view class="myList_cell">
+        <van-cell-group inset>
+            <view wx:for="{{allBorrow}}" wx:for-index="index" wx:if="{{item.borrowRequest==1}}" id="{{index}}" bindtap="goToBorrowConfirm">
+                <van-cell size="large" title="{{item.borrowList[0].title}}" value="{{item.userName}}" />
+            </view>
+        </van-cell-group>
+    </view>
+</block>
+<!-- 归还申请 -->
+<block class="myList" wx:if="{{isManager}}">
+    <view class="myList_title">
+        <view class="myList_title_text">归还申请</view>
+        <view class="myList_title_more">查看更多></view>
+    </view>
+    <view class="myList_cell">
+        <van-cell-group inset>
+            <view wx:for="{{allBorrow}}" wx:for-index="index" wx:if="{{item.returnRequest==1}}" id="{{index}}" bindtap="goToReturnConfirm">
+                <van-cell size="large" title="{{item.borrowList[0].title}}" value="{{item.userName}}" />
+            </view>
+        </van-cell-group>
+    </view>
+</block>
+<!-- 借用中 -->
+<block class="myList" wx:if="{{isManager}}">
+    <view class="myList_title">
+        <view class="myList_title_text">借用中</view>
+        <view class="myList_title_more">查看更多></view>
+    </view>
+    <view class="myList_cell">
+        <van-cell-group inset>
+            <view wx:for="{{allBorrow}}" wx:for-index="index" wx:if="{{item.borrow==1}}" id="{{index}}">
+                <van-cell size="large" title="{{item.borrowList[0].title}}" value="{{item.userName}}" />
+            </view>
+        </van-cell-group>
+    </view>
+</block>
+
+<!-- About -->
+<!-- <view class="about">
+    <rich-text nodes="{{about[0].about}}"></rich-text>
+</view> 

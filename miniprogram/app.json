@@ -1,0 +1,41 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/list/index",
+        "pages/add/index",
+        "pages/file/index",
+        "pages/return/index",
+        "pages/detail/index",
+        "pages/userInfo/index"
+    ],
+    "window": {
+        "backgroundColor": "#aa4d3d",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#aa4d3d",
+        "navigationBarTitleText": "物品借用管理系统",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": true
+    },
+    "tabBar": {
+        "color": "#515151",
+        "selectedColor": "#eedecc",
+        "borderStyle": "black",
+        "backgroundColor": "#aa4d3d",
+        "list": [
+            {
+                "iconPath": "images/tabBar/me.png",
+                "pagePath": "pages/index/index",
+                "selectedIconPath": "images/tabBar/me_s.png",
+                "text": "我的"
+            },
+            {
+                "iconPath": "images/tabBar/index.png",
+                "pagePath": "pages/list/index",
+                "selectedIconPath": "images/tabBar/index_s.png",
+                "text": "物品"
+            }
+
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

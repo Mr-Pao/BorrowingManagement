@@ -1,0 +1,59 @@
+/* pages/list/index.wxss */
+.banner {
+    width: 100%;
+    height: 350rpx;
+    background-color: #aa4d3d;
+}
+
+.swip_photo {
+    width: 100%;
+    height: 100%;
+}
+
+.notice {
+    width: 100%;
+    height: 100rpx;
+    background-color: #eedecc;
+}
+
+.notice_left {
+    width: 10%;
+    height: 60rpx;
+    margin-top: 20rpx;
+    margin-left: 5%;
+    float: left;
+}
+
+.notice_left image {
+    width: 100%;
+    height: 100%;
+}
+
+.notice_right {
+    width: 75%;
+    height: 60rpx;
+    margin-top: 30rpx;
+    margin-left: 10%;
+    float: right;
+}
+
+.notice_text {
+    width: 100%;
+    height: 100%;
+    font-size: 30rpx;
+    text-align: left;
+}
+
+.box {
+    width: 100%;
+}
+
+.kind {
+    width: 20%;
+    float: left;
+}
+
+.list {
+    width: 80%;
+    float: right;
+}
