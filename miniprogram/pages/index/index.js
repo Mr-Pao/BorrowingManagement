@@ -7,7 +7,6 @@ Page({
   data: {
     hasUserInfo: false,
     hasMyBorrow: false,
-    isManager: false,
   },
 
   onLoad: function (options) {
@@ -43,22 +42,13 @@ Page({
     setTimeout(() => {
       if (this.data.openid) {
         this.getMyBorrow()
-        this.setData({
-          hasMyBorrow: true
-        })
+        this.getUserName()
       }
     }, 500)
-    //判断管理员
-    if (this.data.openid == 'oEhrR5dkVRKvOR6VK7uuSdSPXulM') {
-      this.setData({
-        isManager: true
-      })
-      this.getAllBorrow()
-    }
+
   },
 
-
-  //获取用户信息
+  //获取用户昵称和头像
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
     // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -77,6 +67,24 @@ Page({
     })
   },
 
+  //从数据库获取用户信息
+  getUserName(e) {
+    db.collection('UserInfo').where({
+      _openid: this.data.openid,
+    }).get({
+      success: res => {
+        this.setData({
+          UserInfo: res.data[0]
+        })
+        //判断管理员
+        if ( res.data[0].isManager) {
+          this.getAllBorrow()
+        }
+        app.globalData.UserInfo = res.data[0]
+      }
+    })
+  },
+
   //获取借用列表，调用云函数lookup
   getMyBorrow() {
     wx.cloud.callFunction({
@@ -89,7 +97,8 @@ Page({
           res.result.list[i]["borrowTime"] = times.toDate(res.result.list[i]["borrowTime"])
         }
         this.setData({
-          myBorrow: res.result.list
+          myBorrow: res.result.list,
+          hasMyBorrow: true
         })
         app.globalData.myBorrow = res.result.list
       }
@@ -108,6 +117,13 @@ Page({
           allBorrow: res.result.list
         })
       }
+    })
+  },
+
+  //跳转用户信息界面
+  goToUserInfo: function () {
+    wx.navigateTo({
+      url: '/pages/userInfo/index',
     })
   },
 

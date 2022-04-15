@@ -13,7 +13,7 @@
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#aa4d3d",
         "navigationBarTitleText": "物品借用管理系统",
-        "navigationBarTextStyle": "black",
+        "navigationBarTextStyle": "white",
         "enablePullDownRefresh": true
     },
     "tabBar": {

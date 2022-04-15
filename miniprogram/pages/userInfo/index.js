@@ -1,54 +1,45 @@
 // pages/userInfo/index.js
-const db = wx.cloud.database()
-
+const db = wx.cloud.database();
+const app = getApp();
 Page({
 
-    /**
-     * 页面的初始数据
-     */
     data: {
 
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (options) {
-
+        this.setData({
+            openid: app.globalData.openid,
+            userInfo: app.globalData.userInfo,
+            UserInfo: app.globalData.UserInfo
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    //提交响应
+    submit(res) {
+        let id=this.data.openid
+        db.collection("UserInfo").doc(id).set({
+                data: {
+                    name: this.data.name,
+                    tel: this.data.tel,
+                }
+            }).then(res => {
+                wx.showToast({
+                    title: '已提交',
+                })
+            })
+        wx.switchTab({
+            url: '../index/index',
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    onChangeName(event) {
+        this.setData({
+            name:event.detail
+        })
     },
-
-//       //提交响应
-//   submit(res) {
-//     db.collection("userInfo")
-//     .update({
-//       data: {
-//         userid: this.data.userid,
-//         product: this.data.list_id,
-//         borrowTime: Date.parse(new Date),
-//         confirm: 1,
-//         return: 0
-//       }
-//     }).then(res => {
-//       wx.showToast({
-//         title: '已借用',
-//       })
-//     })
-//     wx.switchTab({
-//       url: '../list/index',
-//     })
-//   }
+    onChangeTel(event) {
+        this.setData({
+            tel:event.detail
+        })
+    },
 })

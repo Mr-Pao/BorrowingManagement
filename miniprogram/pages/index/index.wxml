@@ -1,15 +1,20 @@
 <!--pages/index/index.wxml-->
 
 <!-- UserInfo -->
-<view class="userInfo">
-    <view wx:if="{{!hasUserInfo}}" style="margin: auto;">
-        <button bindtap="getUserProfile" type="default"> 登记信息 </button>
+<view  >
+    <view wx:if="{{!hasUserInfo}}" class="userInfo-button">
+        <button bindtap="getUserProfile" type="primary"> 授权登录 </button>
     </view>
-    <block wx:else>
-        <image class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+    <view wx:else   bindtap="goToUserInfo" class="userInfo">
+        <image  class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
         <text class="userInfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+        <view class="userInfo-info" >
+            <text wx:if="{{UserInfo}}">{{UserInfo.name}} {{UserInfo.tel}}</text>
+            <text wx:else>✏️请登记信息</text>
+        </view>
+    </view>
 </view>
+
 
 <!-- BorrowList -->
 <block wx:if="{{hasUserInfo&&hasMyBorrow}}">
@@ -31,7 +36,8 @@
 
 <!-- 以下为管理者界面 -->
 <!-- 借用申请 -->
-<block class="myList" wx:if="{{isManager}}">
+<view wx:if="{{UserInfo.isManager}}">
+<block class="myList" >
     <view class="myList_title">
         <view class="myList_title_text">借用申请</view>
         <view class="myList_title_more">查看更多></view>
@@ -45,7 +51,7 @@
     </view>
 </block>
 <!-- 归还申请 -->
-<block class="myList" wx:if="{{isManager}}">
+<block class="myList" >
     <view class="myList_title">
         <view class="myList_title_text">归还申请</view>
         <view class="myList_title_more">查看更多></view>
@@ -59,7 +65,7 @@
     </view>
 </block>
 <!-- 借用中 -->
-<block class="myList" wx:if="{{isManager}}">
+<block class="myList" >
     <view class="myList_title">
         <view class="myList_title_text">借用中</view>
         <view class="myList_title_more">查看更多></view>
@@ -72,7 +78,7 @@
         </van-cell-group>
     </view>
 </block>
-
+</view>
 <!-- About -->
 <!-- <view class="about">
     <rich-text nodes="{{about[0].about}}"></rich-text>

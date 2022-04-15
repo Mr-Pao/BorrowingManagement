@@ -10,7 +10,8 @@ Page({
     this.setData({
       list_id: options.list_id,    // 保存上一页传来的 _id 字段
       openid:app.globalData.openid,
-      userInfo:app.globalData.userInfo
+      userInfo:app.globalData.userInfo,
+      UserInfo:app.globalData.UserInfo
     })
   },
 
@@ -51,7 +52,7 @@ Page({
     var that = this
     db.collection("borrow").add({
       data: {
-        userName:that.data.userInfo.nickName,
+        userName:that.data.UserInfo.name,
         openid: that.data.openid,
         product: that.data.list_id,
         borrowTime: Date.parse(new Date),

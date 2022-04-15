@@ -1,17 +1,12 @@
 <!--pages/userInfo/index.wxml-->
 
-
-
-
 <view class="userInfo">
-    <view wx:if="{{!hasUserInfo}}" style="margin: auto;">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile" type="default"> 登记信息 </button>
-    </view>
-    <block wx:else>
-        <image class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
+        <image  class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
         <text class="userInfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-</view>
+        <view class="userInfo-info" >
+            <text wx:if="{{UserInfo}}">{{UserInfo.name}} {{UserInfo.Tel}}</text>
+        </view>
+    </view>
 
 
 
@@ -19,26 +14,24 @@
 
 
 
-<!-- <van-cell-group>
+    <van-cell-group>
   <van-field
-    value="{{ name }}"
     required
     clearable
-    label="名字"
+    label="姓名"
     placeholder="请输入姓名"
-    bind:click-icon="onClickIcon"
+    bind:change="onChangeName"
   />
-
   <van-field
-    value="{{ password }}"
-    type="password"
-    label="手机"
+  required
+    clearable
+    type="tel"
+    label="电话"
     placeholder="请输入手机号码"
-    required
-    border="{{ false }}"
+    bind:change="onChangeTel"
   />
 </van-cell-group>
 
 <view class="footer">
     <view  bindtap="submit">提交</view>
-</view> -->
+</view>
