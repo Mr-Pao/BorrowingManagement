@@ -6,10 +6,10 @@
         <button bindtap="getUserProfile" type="primary"> 授权登录 </button>
     </view>
     <view wx:else   bindtap="goToUserInfo" class="userInfo">
-        <image  class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
-        <text class="userInfo-nickname">{{userInfo.nickName}}</text>
+        <image  class="userInfo-avatar" src="{{UserInfo.avatarUrl}}" mode="widthFix"></image>
+        <text class="userInfo-nickname">{{UserInfo.nickName}}</text>
         <view class="userInfo-info" >
-            <text wx:if="{{UserInfo}}">{{UserInfo.name}} {{UserInfo.tel}}</text>
+            <text wx:if="{{UserInfo.name&&UserInfo.tel}}">{{UserInfo.name}} {{UserInfo.tel}}</text>
             <text wx:else>✏️请登记信息</text>
         </view>
     </view>

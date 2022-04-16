@@ -10,77 +10,70 @@ Page({
   },
 
   onLoad: function (options) {
-    //异步获取openid
-    if (app.globalData.isRequst) {
-      this.setData({
-        openid: app.globalData.openid
-      })
-    } else {
-      app.getUserInfoCallback = res => {
-        if (res != '') {
-          this.setData({
-            openid: res.result.openid
-          })
-          app.globalData.openid = res.result.openid
-        }
-      }
-    }
-    //获取用户信息
-    this.getUserProfile()
-    var user = wx.getStorageSync('user'); //从本地缓存获取用户信息
-    if (user && user.nickName) { //如果本地缓存有信息就显示本地缓存
-      this.setData({
-        userInfo: user,
-        hasUserInfo: true
-      })
-      app.globalData.userInfo = user
-    }
-  },
-
-  onShow() {
-    //通过openid获取用户借用列表，延时500ms
-    setTimeout(() => {
-      if (this.data.openid) {
-        this.getMyBorrow()
-        this.getUserName()
-      }
-    }, 500)
-
-  },
-
-  //获取用户昵称和头像
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
-    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log("获取用户信息成功", res)
-        let user = res.userInfo
-        wx.setStorageSync('user', user)
+    //获取openid
+    wx.cloud.callFunction({
+      name: 'getOpenId',
+      success: res => {
+        app.globalData.openid = res.result.openid
         this.setData({
-          userInfo: user,
-          hasUserInfo: true
-        })
-        app.globalData.userInfo = user
+              openid: app.globalData.openid
+            })
+        this.getUserInfo(res.result.openid)  //从数据库下载用户信息
+        this.getMyBorrow(res.result.openid) //从数据库下载用户借用列表
       }
     })
   },
 
-  //从数据库获取用户信息
-  getUserName(e) {
+  onShow() {
+    //通过openid获取用户借用列表
+      if ( app.globalData.openid) {
+        this.getUserInfo(app.globalData.openid)
+        this.getMyBorrow(app.globalData.openid)
+      }
+  },
+
+  //获取用户昵称和头像
+  getUserProfile(e) {
+    wx.getUserProfile({
+      desc: '用于完善资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        this.saveUserProfile(res)
+      }
+    })
+  },
+
+  //存储用户昵称和头像
+  saveUserProfile(res) {
+    db.collection("UserInfo").doc(app.globalData.openid).set({
+      data: {
+        avatarUrl: res.userInfo.avatarUrl,
+        nickName: res.userInfo.nickName
+      },
+      success:res=>{
+        this.onShow()
+        this.onLoad()
+      }
+    })
+  },
+
+  //从数据库下载用户信息
+  getUserInfo(openid) {
     db.collection('UserInfo').where({
-      _openid: this.data.openid,
+      _openid: openid,
     }).get({
       success: res => {
-        this.setData({
-          UserInfo: res.data[0]
-        })
-        //判断管理员
-        if ( res.data[0].isManager) {
-          this.getAllBorrow()
+        if(res.data!=''){
+          this.setData({
+            UserInfo: res.data[0],
+            hasUserInfo: true
+          })
+          //判断管理员
+          if (res.data[0].isManager) {
+            this.getAllBorrow()
+          }
+          app.globalData.UserInfo = res.data[0]
         }
-        app.globalData.UserInfo = res.data[0]
+       
       }
     })
   },

@@ -1,10 +1,10 @@
 <!--pages/userInfo/index.wxml-->
 
 <view class="userInfo">
-        <image  class="userInfo-avatar" src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
-        <text class="userInfo-nickname">{{userInfo.nickName}}</text>
+        <image  class="userInfo-avatar" src="{{UserInfo.avatarUrl}}" mode="widthFix"></image>
+        <text class="userInfo-nickname">{{UserInfo.nickName}}</text>
         <view class="userInfo-info" >
-            <text wx:if="{{UserInfo}}">{{UserInfo.name}} {{UserInfo.Tel}}</text>
+            <text wx:if="{{UserInfo}}">{{UserInfo.name}} {{UserInfo.tel}}</text>
         </view>
     </view>
 

@@ -1,33 +1,12 @@
 App({
   globalData: {
-    collection: 'products', // 用于存储物品的集合名称
-    fileLimit: 10, // 最大文件上传数量
-    openid: {}, // openid
-    isRequest: false, // 默认是false,异步请求拿到结果后才给true
   },
   async onLaunch() {
     this.initcloud()
-    this.getOpenId()
   },
 
-  // 获取用户OpenID，全局变量
-  async getOpenId() {
-    wx.cloud.callFunction({
-      name: 'getOpenId',
-      success: res => {
-        this.globalData.isRequest = true //异步请求
-        if (this.getUserInfoCallback) {
-          this.getUserInfoCallback(res)
-        }
-      }
-    })
-  },
-
-
+  //初始化云开发环境（支持环境共享和正常两种模式）
   flag: false,
-  /**
-   * 初始化云开发环境（支持环境共享和正常两种模式）
-   */
   async initcloud() {
     const shareinfo = wx.getExtConfigSync() // 检查 ext 配置文件
     const normalinfo = require('./envList.js').envList || [] // 读取 envlist 文件

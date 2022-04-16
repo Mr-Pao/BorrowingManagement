@@ -8,19 +8,24 @@ Page({
 
   onLoad: function (options) {
     this.setData({
-      list_id: options.list_id,    // 保存上一页传来的 _id 字段
-      openid:app.globalData.openid,
-      userInfo:app.globalData.userInfo,
-      UserInfo:app.globalData.UserInfo
+      list_id: options.list_id, // 保存上一页传来的 _id 字段
+      openid: app.globalData.openid,
+      UserInfo: app.globalData.UserInfo
     })
   },
 
+
+  onShow() {
+    this.showDetail()
+  },
+
   // 根据 _id 值查询并显示数据
-  async onShow() {
+  async showDetail(e) {
+    console.log(this.data.list_id.length)
     if (this.data.list_id.length > 0) {
       const db = await getApp().database()
       // 根据 _id 值查询数据库中对应的待办事项
-      db.collection(getApp().globalData.collection).where({
+      db.collection('products').where({
         _id: this.data.list_id
       }).get().then(res => {
         // 解包获得待办事项
@@ -52,13 +57,13 @@ Page({
     var that = this
     db.collection("borrow").add({
       data: {
-        userName:that.data.UserInfo.name,
+        userName: that.data.UserInfo.name,
         openid: that.data.openid,
         product: that.data.list_id,
         borrowTime: Date.parse(new Date),
         borrowRequest: 1,
-        borrow:0,
-        returnRequest:0,
+        borrow: 0,
+        returnRequest: 0,
         return: 0
       }
     }).then(res => {

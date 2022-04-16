@@ -47,7 +47,8 @@ Page({
       }
     })
   },
-
+  
+//侧边栏
   onChange(event) {
     this.setData({
       activeKey:event.detail

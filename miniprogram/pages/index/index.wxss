@@ -13,7 +13,7 @@
 .userInfo-button {
     width: 40%;
     margin: auto;
-    padding: 40rpx;
+    padding-top: 400rpx;
 }
 
 .userInfo-avatar {

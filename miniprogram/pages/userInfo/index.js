@@ -10,7 +10,6 @@ Page({
     onLoad: function (options) {
         this.setData({
             openid: app.globalData.openid,
-            userInfo: app.globalData.userInfo,
             UserInfo: app.globalData.UserInfo
         })
     },
@@ -18,7 +17,9 @@ Page({
     //提交响应
     submit(res) {
         let id=this.data.openid
-        db.collection("UserInfo").doc(id).set({
+        db.collection("UserInfo").where({
+            _id:id
+        }).update({
                 data: {
                     name: this.data.name,
                     tel: this.data.tel,
@@ -27,10 +28,10 @@ Page({
                 wx.showToast({
                     title: '已提交',
                 })
+                wx.switchTab({
+                    url: '../index/index',
+                })
             })
-        wx.switchTab({
-            url: '../index/index',
-        })
     },
     onChangeName(event) {
         this.setData({
