@@ -11,45 +11,34 @@
 </view> -->
 
 <!-- Notice -->
-    <view class="notice">
-        <view class="notice_left">
-            <image src="../../images/notice.svg"></image>
-        </view>
-        <swiper class="notice_right" vertical autoplay circular interval="3000">
-            <block wx:for="{{noticeList}}">
-                <navigator url="" open-type="navigate">
-                    <swiper-item>
-                        <view class="notice_text">{{item.text}}</view>
-                    </swiper-item>
-                </navigator>
-            </block>
-        </swiper>
+<view class="notice">
+    <view class="notice_left">
+        <image src="../../images/notice.svg"></image>
     </view>
+    <swiper class="notice_right" vertical autoplay circular interval="3000">
+        <block wx:for="{{noticeList}}">
+            <navigator url="" open-type="navigate">
+                <swiper-item>
+                    <view class="notice_text">{{item.text}}</view>
+                </swiper-item>
+            </navigator>
+        </block>
+    </swiper>
+</view>
 
-    <view class="box">
-
-        <view class="kind">
-            <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
-                <van-sidebar-item wx:for="{{kind}}" title="{{item}}" />
-            </van-sidebar>
-        </view>
-        <view class="list">
-            <view wx:for="{{products}}" wx:if="{{item.kind==activeKey+1}}" id="{{index}}" id="{{item._id}}" userid="{{userid}}" bindtap="goToDetail">
-                <van-cell size="large" title="{{item.title}}"  />
-            </view>
-        </view>
-
-
+<!-- list -->
+<view class="box">
+    <view class="kind">
+        <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
+            <van-sidebar-item wx:for="{{kind}}" title="{{item}}" />
+        </van-sidebar>
     </view>
-
-
-    <!-- list -->
-    <!-- <view class="list">
-    <van-cell-group inset>
-        <view wx:for="{{products}}" id="{{item._id}}" userid="{{userid}}" bindtap="goToDetail">
-            <van-cell icon="star-o" size="large" is-link title="{{item.title}}" value="{{item.desc}}" />
+    <view class="list">
+        <view wx:for="{{products}}" wx:if="{{item.kind==activeKey+1}}" id="{{item._id}}" bindtap="goToDetail">
+            <van-cell size="large" title="{{item.title}}" />
         </view>
-    </van-cell-group>
-</view> -->
+    </view>
+</view>
 
-    <van-notify id="van-notify" />
+
+<van-notify id="van-notify" />

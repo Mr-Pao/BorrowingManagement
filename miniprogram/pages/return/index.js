@@ -15,9 +15,29 @@ Page({
   },
 
   async onShow() {
-
+    this.showDetail()
   },
 
+
+    // 根据 _id 值查询并显示数据
+    async showDetail(e) {
+      if (this.data.myBorrow[this.data.list_index].product.length > 0) {
+          const db = await getApp().database()
+          // 根据 _id 值查询数据库中对应的待办事项
+          db.collection('products').where({
+              _id: this.data.myBorrow[this.data.list_index].product
+          }).get().then(res => {
+              // 解包获得待办事项
+              const {
+                  data: [detail]
+              } = res
+              // 将数据保存到本地、更新显示
+              this.setData({
+                  detail
+              })
+          })
+      }
+  },
 
   //归还响应
   return(e) {

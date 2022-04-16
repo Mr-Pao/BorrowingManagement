@@ -12,7 +12,7 @@
   
 
 .form-cell_picture{
-    margin-bottom: 10px;
+  margin: auto;
 }
 
 .form-cell_title {

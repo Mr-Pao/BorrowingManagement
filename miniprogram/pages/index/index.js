@@ -10,6 +10,7 @@ Page({
   },
 
   onLoad: function (options) {
+    this.getProducts()
     //获取openid
     wx.cloud.callFunction({
       name: 'getOpenId',
@@ -30,6 +31,23 @@ Page({
         this.getUserInfo(app.globalData.openid)
         this.getMyBorrow(app.globalData.openid)
       }
+  },
+
+  
+  //通过云函数获取所有物品
+  getProducts() {
+    wx.cloud.callFunction({
+      name: "getData",
+      data: {
+        dataName: "products"
+      },
+      success: res => {
+        this.setData({
+          products: res.result.data
+        })
+        app.globalData.products=res.result.data
+      }
+    })
   },
 
   //获取用户昵称和头像
@@ -122,6 +140,7 @@ Page({
 
   //跳转归还
   goToReturn: function (e) {
+    console.log(e)
     wx.navigateTo({
       url: '/pages/return/index?list_id=' + e.currentTarget.id,
     })

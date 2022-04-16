@@ -50,3 +50,4 @@ App({
     return (await this.cloud()).database()
   },
 })
+

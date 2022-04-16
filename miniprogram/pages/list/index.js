@@ -3,26 +3,22 @@ const db = wx.cloud.database();
 const app = getApp();
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 
-
 Page({
   data: {
     activeKey: 0,
-    kind:["模块","工具","开发板","套件","显示屏","其它"]
+    kind: ["模块", "工具", "开发板", "套件", "显示屏", "其它"]
   },
   onLoad: function (options) {
-    //通过云函数获取所有物品
-    wx.cloud.callFunction({
-      name: "getData",
-      data: {
-        dataName: "products"
-      },
-      success: res => {
-        this.setData({
-          products: res.result.data
-        })
-      }
-    })
-    //通过云函数获取轮播图片
+    this.getNoticeList()
+    this.getPhotoList()
+    this.setData({
+      products: app.globalData.products
+  })
+  },
+
+
+  //通过云函数获取轮播图片
+  getPhotoList() {
     wx.cloud.callFunction({
       name: "getData",
       data: {
@@ -34,7 +30,10 @@ Page({
         })
       }
     })
-    // 通过云函数获取公告
+  },
+
+  // 通过云函数获取公告
+  getNoticeList() {
     wx.cloud.callFunction({
       name: "getData",
       data: {
@@ -47,13 +46,16 @@ Page({
       }
     })
   },
-  
-//侧边栏
+
+  //侧边栏
   onChange(event) {
     this.setData({
-      activeKey:event.detail
+      activeKey: event.detail
     })
-    Notify({ type: 'primary', message: event.detail });
+    Notify({
+      type: 'primary',
+      message: event.detail
+    });
   },
 
   //跳转到物品详情
