@@ -1,11 +1,28 @@
+.form-group {
+    width: calc(100% - 40px);
+    margin: 10px 20px;
+    border-radius: 10px;
+    background: white;
+  }
+  
+  
+  .form-cell {
+    padding: 20px 15px;
+  }
+  
+
+.form-cell_picture{
+    margin-bottom: 10px;
+}
+
 .form-cell_title {
+font-size: 50rpx;
   margin-bottom: 10px;
-  font-size: medium;
 }
 
 .form-cell_desc {
-  font-size: small;
-  color: lightgray;
+  font-size: 32rpx;
+  color: #808080;
 }
 
 .footer {

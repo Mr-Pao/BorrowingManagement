@@ -35,7 +35,7 @@
         </view>
         <view class="list">
             <view wx:for="{{products}}" wx:if="{{item.kind==activeKey+1}}" id="{{index}}" id="{{item._id}}" userid="{{userid}}" bindtap="goToDetail">
-                <van-cell size="large" title="{{item.title}}" value="{{item.desc}}" />
+                <van-cell size="large" title="{{item.title}}"  />
             </view>
         </view>
 
