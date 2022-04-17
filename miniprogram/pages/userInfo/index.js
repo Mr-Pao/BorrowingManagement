@@ -8,11 +8,27 @@ Page({
     },
 
     onLoad: function (options) {
+        this.getX()
         this.setData({
             openid: app.globalData.openid,
             UserInfo: app.globalData.UserInfo
         })
     },
+
+  //通过云函数获取X
+  getX() {
+    wx.cloud.callFunction({
+      name: "getData",
+      data: {
+        dataName: "X"
+      },
+      success: res => {
+        this.setData({
+          X: res.result.data[0]
+        })
+      }
+    })
+  },
 
     //提交响应
     submit(res) {

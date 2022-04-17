@@ -4,30 +4,25 @@
         <image  class="userInfo-avatar" src="{{UserInfo.avatarUrl}}" mode="widthFix"></image>
         <text class="userInfo-nickname">{{UserInfo.nickName}}</text>
         <view class="userInfo-info" >
-            <text wx:if="{{UserInfo}}">{{UserInfo.name}} {{UserInfo.tel}}</text>
+            <text wx:if="{{UserInfo.name&&UserInfo.tel}}">{{UserInfo.name}} {{UserInfo.tel}}</text>
         </view>
     </view>
-
-
-
-
-
 
 
     <van-cell-group>
   <van-field
     required
     clearable
-    label="姓名"
-    placeholder="请输入姓名"
+    label="{{X.name}}"
+    placeholder="--"
     bind:change="onChangeName"
   />
   <van-field
   required
     clearable
     type="tel"
-    label="电话"
-    placeholder="请输入手机号码"
+    label="{{X.tel}}"
+    placeholder="--"
     bind:change="onChangeTel"
   />
 </van-cell-group>

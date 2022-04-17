@@ -19,6 +19,6 @@
     </view>
 </view>
 
-<view class="footer">
+<view class="footer" >
     <view bindtap="borrow">申请借用</view>
 </view>

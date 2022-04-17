@@ -13,7 +13,7 @@ Page({
             openid: app.globalData.openid,
             UserInfo: app.globalData.UserInfo
         })
-        this.data.borrowTime = times.toDate( Date.parse(new Date))
+        this.data.borrowTime = times.toDate(Date.parse(new Date))
     },
 
 
@@ -23,7 +23,6 @@ Page({
 
     // 根据 _id 值查询并显示数据
     async showDetail(e) {
-        console.log(this.data.list_id.length)
         if (this.data.list_id.length > 0) {
             const db = await getApp().database()
             // 根据 _id 值查询数据库中对应的待办事项
@@ -42,7 +41,7 @@ Page({
         }
     },
 
-    
+
     //长按识别小程序码
     previewImage: function (e) {
         var url = e.target.dataset.src;
@@ -56,34 +55,47 @@ Page({
     copy: function (e) {
         let item = e.currentTarget.dataset.item;
         wx.setClipboardData({
-        data: item,
-        success(res){
-            wx.showToast({
-                title: '复制成功',
-                icon:"success"
-            }); 
-        }
-    });
+            data: item,
+            success(res) {
+                wx.showToast({
+                    title: '复制成功',
+                    icon: "success"
+                });
+            }
+        });
     },
-    
+
     //借用响应
     borrow(e) {
         var that = this
-        wx.requestSubscribeMessage({
-            tmplIds: ['9tv28UFh_-9rl6P6w68_AWFSzi0nLQ9S3NgNy44tQog'],
-            success(res) {
-                that.addborrow()
-            },
-            fail(err) {
-                console.log(err)
-            }
-        })
+        if (this.data.UserInfo.name != '' && this.data.UserInfo.tel != '') {
+            wx.requestSubscribeMessage({
+                tmplIds: ['9tv28UFh_-9rl6P6w68_AWFSzi0nLQ9S3NgNy44tQog'],
+                success(res) {
+                    that.addborrow()
+                },
+                fail(err) {
+                    console.log(err)
+                }
+            })
+        } else {
+            wx.navigateTo({
+                url: '../userInfo/index',
+                success(res) {
+                    wx.showToast({
+                        title: '请登记信息',
+                        icon:'none',
+                        duration:2000
+                    })
+                }
+            })
+        }
+
     },
 
 
     //添加借用
     addborrow() {
-       
         var that = this
         db.collection("borrow").add({
             data: {
