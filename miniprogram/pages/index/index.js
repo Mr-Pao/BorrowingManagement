@@ -1,6 +1,5 @@
 // pages/index/index.js
 const db = wx.cloud.database();
-var times = require('../times.js');
 const app = getApp();
 
 Page({
@@ -107,9 +106,6 @@ Page({
         openid: app.globalData.openid
       },
       complete: res => {
-        for (let i = 0; i < res.result.list.length; i++) {
-          res.result.list[i]["borrowTime"] = times.toDate(res.result.list[i]["borrowTime"])
-        }
         this.setData({
           myBorrow: res.result.list,
           hasMyBorrow: true
@@ -124,9 +120,6 @@ Page({
     wx.cloud.callFunction({
       name: 'lookup',
       complete: res => {
-        for (let i = 0; i < res.result.list.length; i++) {
-          res.result.list[i]["borrowTime"] = times.toDate(res.result.list[i]["borrowTime"])
-        }
         this.setData({
           allBorrow: res.result.list
         })

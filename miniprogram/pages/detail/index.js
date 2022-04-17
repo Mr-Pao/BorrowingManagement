@@ -1,6 +1,7 @@
 /* 物品详情 */
 const db = wx.cloud.database()
 const app = getApp();
+var times = require('../times.js');
 Page({
     data: {
 
@@ -12,6 +13,7 @@ Page({
             openid: app.globalData.openid,
             UserInfo: app.globalData.UserInfo
         })
+        this.data.borrowTime = times.toDate( Date.parse(new Date))
     },
 
 
@@ -81,13 +83,14 @@ Page({
 
     //添加借用
     addborrow() {
+       
         var that = this
         db.collection("borrow").add({
             data: {
                 userName: that.data.UserInfo.name,
                 openid: that.data.openid,
                 product: that.data.list_id,
-                borrowTime: Date.parse(new Date),
+                borrowTime: this.data.borrowTime,
                 borrowRequest: 1,
                 borrow: 0,
                 returnRequest: 0,

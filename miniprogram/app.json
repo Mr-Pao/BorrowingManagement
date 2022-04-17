@@ -17,10 +17,10 @@
         "enablePullDownRefresh": true
     },
     "tabBar": {
-        "color": "#515151",
-        "selectedColor": "#eedecc",
-        "borderStyle": "black",
-        "backgroundColor": "#aa4d3d",
+        "color": "#707070",
+        "selectedColor": "#aa4d3d",
+        "borderStyle": "white",
+        "backgroundColor": "#f6f6f6",
         "list": [
             {
                 "iconPath": "images/tabBar/me.png",

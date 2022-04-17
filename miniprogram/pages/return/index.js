@@ -1,5 +1,6 @@
 const db = wx.cloud.database()
 const app = getApp();
+var times = require('../times.js');
 Page({
 
   data: {
@@ -12,6 +13,7 @@ Page({
       myBorrow: app.globalData.myBorrow, //保存借用信息
       list_index: options.list_id, // 保存上一页传来的_id 字段
     })
+    this.data.returnTime = times.toDate( Date.parse(new Date))
   },
 
   async onShow() {
@@ -83,6 +85,7 @@ Page({
       })
       .update({
         data: {
+          returnTime: this.data.returnTime,
           borrowRequest: 0,
           borrow: 1,
           returnRequest: 1,
