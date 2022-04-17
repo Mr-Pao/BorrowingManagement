@@ -49,6 +49,20 @@ Page({
             urls: [url]
         })
     },
+
+    //点击复制网址
+    copy: function (e) {
+        let item = e.currentTarget.dataset.item;
+        wx.setClipboardData({
+        data: item,
+        success(res){
+            wx.showToast({
+                title: '复制成功',
+                icon:"success"
+            }); 
+        }
+    });
+    },
     
     //借用响应
     borrow(e) {

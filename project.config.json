@@ -49,12 +49,17 @@
         "useStaticServer": true
     },
     "compileType": "miniprogram",
-    "libVersion": "2.23.3",
+    "libVersion": "2.23.4",
     "appid": "wx2ac1f7bd015a0c3d",
     "projectname": "%E7%89%A9%E5%93%81%E5%80%9F%E7%94%A8%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F",
     "miniprogramRoot": "miniprogram/",
     "cloudfunctionRoot": "cloudfunctions/",
     "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+    "srcMiniprogramRoot": "miniprogram/",
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    },
     "condition": {
         "plugin": {
             "list": []
@@ -68,10 +73,5 @@
         "miniprogram": {
             "list": []
         }
-    },
-    "srcMiniprogramRoot": "miniprogram/",
-    "editorSetting": {
-        "tabIndent": "insertSpaces",
-        "tabSize": 4
     }
 }

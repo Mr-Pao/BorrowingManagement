@@ -10,16 +10,19 @@ Page({
   },
 
   onLoad: function (options) {
+    //获取物品信息
     this.getProducts()
+    // 检查是否需要更新
+    this.checkForUpdates();
     //获取openid
     wx.cloud.callFunction({
       name: 'getOpenId',
       success: res => {
         app.globalData.openid = res.result.openid
         this.setData({
-              openid: app.globalData.openid
-            })
-        this.getUserInfo(res.result.openid)  //从数据库下载用户信息
+          openid: app.globalData.openid
+        })
+        this.getUserInfo(res.result.openid) //从数据库下载用户信息
         this.getMyBorrow(res.result.openid) //从数据库下载用户借用列表
       }
     })
@@ -27,13 +30,13 @@ Page({
 
   onShow() {
     //通过openid获取用户借用列表
-      if ( app.globalData.openid) {
-        this.getUserInfo(app.globalData.openid)
-        this.getMyBorrow(app.globalData.openid)
-      }
+    if (app.globalData.openid) {
+      this.getUserInfo(app.globalData.openid)
+      this.getMyBorrow(app.globalData.openid)
+    }
   },
 
-  
+
   //通过云函数获取所有物品
   getProducts() {
     wx.cloud.callFunction({
@@ -45,7 +48,7 @@ Page({
         this.setData({
           products: res.result.data
         })
-        app.globalData.products=res.result.data
+        app.globalData.products = res.result.data
       }
     })
   },
@@ -67,7 +70,7 @@ Page({
         avatarUrl: res.userInfo.avatarUrl,
         nickName: res.userInfo.nickName
       },
-      success:res=>{
+      success: res => {
         this.onShow()
         this.onLoad()
       }
@@ -80,7 +83,7 @@ Page({
       _openid: openid,
     }).get({
       success: res => {
-        if(res.data!=''){
+        if (res.data != '') {
           this.setData({
             UserInfo: res.data[0],
             hasUserInfo: true
@@ -91,7 +94,7 @@ Page({
           }
           app.globalData.UserInfo = res.data[0]
         }
-       
+
       }
     })
   },
@@ -229,5 +232,28 @@ Page({
     }
   },
 
+
+  checkForUpdates: function () {
+    const updateManager = wx.getUpdateManager()
+    updateManager.onCheckForUpdate(function (res) {
+      // 请求完新版本信息的回调
+      console.log(res.hasUpdate)
+    })
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
+    updateManager.onUpdateFailed(function () {
+      // 新版本下载失败
+    })
+  },
 
 })

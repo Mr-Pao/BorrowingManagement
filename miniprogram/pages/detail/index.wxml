@@ -1,6 +1,6 @@
 <view class="form-group">
     <view class="form-cell">
-        <view class="form-cell_picture" wx:if="{{detail.picture}}"><image src="{{detail.picture}}" mode="aspectFill"/></view>
+        <view class="form-cell_picture" wx:if="{{detail.picture}}"><image src="{{detail.picture}}" mode="widthFix"/></view>
         <view class="form-cell_title">{{detail.title}}</view>
         <view class="form-cell_desc">{{detail.desc}}</view>
     </view>
@@ -13,7 +13,11 @@
     </view>
 </view>
 
-
+<view class="form-group" wx:if="{{detail.link2}}">
+    <view class="form-cell">
+        <view class="form-cell_desc" bindtap="copy" data-item='{{detail.link2}}'>相关资料：点击复制网址</view>
+    </view>
+</view>
 
 <view class="footer">
     <view bindtap="borrow">申请借用</view>
