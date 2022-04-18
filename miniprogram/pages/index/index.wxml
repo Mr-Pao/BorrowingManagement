@@ -22,7 +22,7 @@
     <view class="myList" wx:if="{{hasUserInfo&&hasMyBorrow}}">
         <view class="myList_title">
             <view class="myList_title_text">我的借用</view>
-            <view class="myList_title_more">查看更多></view>
+            <!-- <view class="myList_title_more">查看更多></view> -->
         </view>
         <view class="myList_cell">
             <van-cell-group inset>
@@ -48,7 +48,7 @@
     <block class="myList">
         <view class="myList_title">
             <view class="myList_title_text">借用申请</view>
-            <view class="myList_title_more">查看更多></view>
+            <!-- <view class="myList_title_more">查看更多></view> -->
         </view>
         <view class="myList_cell">
             <van-cell-group inset>
@@ -62,7 +62,7 @@
     <block class="myList">
         <view class="myList_title">
             <view class="myList_title_text">归还申请</view>
-            <view class="myList_title_more">查看更多></view>
+            <!-- <view class="myList_title_more">查看更多></view> -->
         </view>
         <view class="myList_cell">
             <van-cell-group inset>
@@ -76,7 +76,7 @@
     <block class="myList">
         <view class="myList_title">
             <view class="myList_title_text">借用中</view>
-            <view class="myList_title_more">查看更多></view>
+            <!-- <view class="myList_title_more">查看更多></view> -->
         </view>
         <view class="myList_cell">
             <van-cell-group inset>

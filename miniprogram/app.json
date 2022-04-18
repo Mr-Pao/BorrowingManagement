@@ -6,7 +6,8 @@
         "pages/file/index",
         "pages/return/index",
         "pages/detail/index",
-        "pages/userInfo/index"
+        "pages/userInfo/index",
+        "pages/about/index"
     ],
     "window": {
         "backgroundColor": "#aa4d3d",
@@ -33,6 +34,12 @@
                 "pagePath": "pages/list/index",
                 "selectedIconPath": "images/tabBar/index_s.png",
                 "text": "物品"
+            },
+            {
+                "iconPath": "images/tabBar/about.png",
+                "pagePath": "pages/about/index",
+                "selectedIconPath": "images/tabBar/about_s.png",
+                "text": "关于"
             }
 
         ]

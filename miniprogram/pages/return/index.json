@@ -5,5 +5,5 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-dialog": "@vant/weapp/dialog/index"
   },
-  "navigationBarTitleText": "编辑待办"
+  "navigationBarTitleText": "物品详情"
 }

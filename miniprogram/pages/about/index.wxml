@@ -1,0 +1,23 @@
+<!--pages/about/index.wxml-->
+<view class="form-group">
+    <view class="title">Developer</view>
+    <view class="desc">一只狍</view>
+    <view class="title">Designer</view>
+    <view class="desc">一只狍</view>
+    <view class="title">Wechat</view>
+    <view class="desc" bindtap="copy" data-item='Pao_Leo'>Pao_Leo</view>
+    <view class="image">
+        <image src="../../images/2.gif" mode="widthFix" style="width: 40%;"></image>
+    </view>
+</view>
+
+<view class="form-group">
+    <button open-type='share' plain style="border-color: #fff;color: #707070;text-align: left;font-size: 32rpx;padding-top: 10rpx;">推荐给朋友</button>
+    <button open-type='contact' plain style="border-color: #fff;color: #707070;text-align: left;font-size: 32rpx;padding-top: 10rpx;">意见反馈</button>
+</view>
+
+
+<!-- <view class="other">作者其他作品</view>
+<view class="form-group">
+    <view class="cell" bindtap="goToMiniProgram">家属院猫咪图鉴</view>
+</view> -->
