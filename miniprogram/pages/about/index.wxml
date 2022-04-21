@@ -1,8 +1,8 @@
 <!--pages/about/index.wxml-->
 <view class="form-group">
+    <view class="title">Version</view>
+    <view class="desc">1.6.0</view>
     <view class="title">Developer</view>
-    <view class="desc">一只狍</view>
-    <view class="title">Designer</view>
     <view class="desc">一只狍</view>
     <view class="title">Wechat</view>
     <view class="desc" bindtap="copy" data-item='Pao_Leo'>Pao_Leo</view>
@@ -13,7 +13,7 @@
 
 <view class="form-group">
     <button open-type='share' plain style="border-color: #fff;color: #707070;text-align: left;font-size: 32rpx;padding-top: 10rpx;">推荐给朋友</button>
-    <button open-type='contact' plain style="border-color: #fff;color: #707070;text-align: left;font-size: 32rpx;padding-top: 10rpx;">意见反馈</button>
+    <button open-type='contact' plain style="border-color: #fff;color: #707070;text-align: left;font-size: 32rpx;padding-top: 10rpx;">意见反馈&资源分享</button>
 </view>
 
 
