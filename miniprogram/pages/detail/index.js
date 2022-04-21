@@ -84,8 +84,8 @@ Page({
                 success(res) {
                     wx.showToast({
                         title: '请登记信息',
-                        icon:'none',
-                        duration:2000
+                        icon: 'none',
+                        duration: 2000
                     })
                 }
             })
@@ -116,5 +116,19 @@ Page({
         wx.switchTab({
             url: '../list/index',
         })
+    },
+
+    //分享给好友
+    onShareAppMessage: function () {
+        return {
+            path: '/pages/index/index',
+            imageUrl: '../../images/fengmian.png'
+        }
+    },
+    onShareTimeline: function () {
+        return {
+            path: '/pages/index/index',
+            imageUrl: '../../images/fengmian.png'
+        }
     },
 })

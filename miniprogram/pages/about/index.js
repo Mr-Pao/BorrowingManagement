@@ -18,13 +18,21 @@ Page({
         });
     },
 
-    onShareAppMessage() {
-        return {
-            path: '/pages/index/index?id=123',
-            imageUrl:'/miniprogram/images/fengmian.png'
-        }
-    },
+  //分享给好友
+  onShareAppMessage: function () {
+    return {
+      path: '/pages/index/index',
+      imageUrl: '../../images/fengmian.png'
+    }
+  },
+  onShareTimeline: function () {
+    return {
+      path: '/pages/index/index',
+      imageUrl: '../../images/fengmian.png'
+    }
+  },
 
+    //跳转小程序
     goToMiniProgram1: function () {
         wx.navigateToMiniProgram({
             appId: 'wx5d52c6c8f098ed5e', // 其他小程序APPID,必填

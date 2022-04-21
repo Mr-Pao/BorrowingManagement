@@ -6,16 +6,30 @@ import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 Page({
   data: {
     activeKey: 0,
-    kind: ["模块", "工具", "开发板", "套件", "显示屏", "其它"]
   },
   onLoad: function (options) {
     this.getNoticeList()
     this.getPhotoList()
+    this.getKind()
     this.setData({
       products: app.globalData.products
   })
   },
 
+ //通过云函数获取物品分类
+ getKind() {
+  wx.cloud.callFunction({
+    name: "getData",
+    data: {
+      dataName: "kind"
+    },
+    success: res => {
+      this.setData({
+        kind: res.result.data[0].kind
+      })
+    }
+  })
+},
 
   //通过云函数获取轮播图片
   getPhotoList() {
@@ -65,15 +79,17 @@ Page({
     })
   },
 
-  //用户点击右上角分享
+  //分享给好友
   onShareAppMessage: function () {
     return {
-      title: '物品借用管理系统'
+      path: '/pages/index/index',
+      imageUrl: '../../images/fengmian.png'
     }
   },
   onShareTimeline: function () {
     return {
-      title: '物品借用管理系统',
+      path: '/pages/index/index',
+      imageUrl: '../../images/fengmian.png'
     }
   },
 })

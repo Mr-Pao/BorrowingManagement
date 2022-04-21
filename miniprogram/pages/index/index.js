@@ -213,18 +213,19 @@ Page({
     }
   },
 
-  //用户点击右上角分享
+  //分享给好友
   onShareAppMessage: function () {
     return {
-      title: '物品借用管理系统'
+      path: '/pages/index/index',
+      imageUrl: '../../images/fengmian.png'
     }
   },
   onShareTimeline: function () {
     return {
-      title: '物品借用管理系统',
+      path: '/pages/index/index',
+      imageUrl: '../../images/fengmian.png'
     }
   },
-
 
   checkForUpdates: function () {
     const updateManager = wx.getUpdateManager()

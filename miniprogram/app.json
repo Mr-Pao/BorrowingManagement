@@ -2,8 +2,6 @@
     "pages": [
         "pages/index/index",
         "pages/list/index",
-        "pages/add/index",
-        "pages/file/index",
         "pages/return/index",
         "pages/detail/index",
         "pages/userInfo/index",
