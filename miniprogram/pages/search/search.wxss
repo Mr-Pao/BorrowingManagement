@@ -1,0 +1,5 @@
+/* pages/search/search.wxss */
+.list {
+    width: 100%;
+    float: right;
+}

@@ -54,6 +54,6 @@
 }
 
 .list {
-    width: 76%;
+    width: 550rpx;
     float: right;
 }

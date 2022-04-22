@@ -5,7 +5,8 @@
         "pages/return/index",
         "pages/detail/index",
         "pages/userInfo/index",
-        "pages/about/index"
+        "pages/about/index",
+        "pages/search/search"
     ],
     "window": {
         "backgroundColor": "#aa4d3d",

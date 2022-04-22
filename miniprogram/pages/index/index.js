@@ -9,6 +9,8 @@ Page({
   },
 
   onLoad: function (options) {
+    //获取物品分类
+    this.getKind()
     //获取物品信息
     this.getProducts()
     // 检查是否需要更新
@@ -35,6 +37,21 @@ Page({
     }
   },
 
+ //通过云函数获取物品分类
+ getKind() {
+  wx.cloud.callFunction({
+    name: "getData",
+    data: {
+      dataName: "kind"
+    },
+    success: res => {
+      this.setData({
+        kind: res.result.data[0].kind
+      })
+      app.globalData.kind = res.result.data[0].kind
+    }
+  })
+},
 
   //通过云函数获取所有物品
   getProducts() {

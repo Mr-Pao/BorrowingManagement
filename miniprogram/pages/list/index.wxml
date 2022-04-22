@@ -10,8 +10,18 @@
     </swiper>
 </view> -->
 
+<!-- Search -->
+<van-search 
+    value="{{ value }}" 
+    shape="round"
+    background="#aa4d3d"
+    placeholder="请输入搜索关键词"
+    bind:change="onChange"
+    bind:search="onSearch"
+/>
+
 <!-- Notice -->
-<view class="notice">
+<!-- <view class="notice">
     <view class="notice_left">
         <image src="../../images/notice.svg"></image>
     </view>
@@ -24,7 +34,7 @@
             </navigator>
         </block>
     </swiper>
-</view>
+</view> -->
 
 <!-- list -->
 <view class="box">

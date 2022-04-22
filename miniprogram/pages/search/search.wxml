@@ -1,0 +1,7 @@
+<!--pages/search/search.wxml-->
+<view wx:if="{{searchList.length == 0}}"> <text>无</text> </view>
+<view wx:else class="list">
+        <view wx:for="{{searchList}}"  id="{{item._id}}" bindtap="goToDetail">
+            <van-cell size="large" title="{{item.title}}" />
+        </view>
+    </view>
