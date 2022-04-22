@@ -6,7 +6,7 @@ import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 Page({
   data: {
     activeKey: 0,
-    value: '',
+    search: '',
   },
   onLoad: function (options) {
     this.getNoticeList()
@@ -48,7 +48,7 @@ Page({
   },
 
   //侧边栏
-  onChange(event) {
+  onSelect(event) {
     this.setData({
       activeKey: event.detail
     })
@@ -99,11 +99,18 @@ Page({
           searchList: res.data
         })
         app.globalData.searchList=res.data
-        wx.navigateTo({
-          url: '../search/search',
+        if (res.data=='') {
+          wx.showToast({
+            title: '无此物品',
+            icon: 'error',
+            duration: 2000
         })
+        }else{
+          wx.navigateTo({
+            url: '../search/search',
+          })
+        }
       }
     })
-   
   },
 })

@@ -1,5 +1,5 @@
 /* pages/about/index.wxss */
-.title{
+.title {
     text-align: center;
     font-size: large;
     font-weight: bold;
@@ -7,29 +7,29 @@
     padding-top: 20rpx;
 }
 
-.desc{
+.desc {
     text-align: center;
     color: #707070;
     padding-top: 10rpx;
     padding-bottom: 30rpx;
 }
 
-.image{
-display: flex;
-justify-content: center;
-align-items: center;
-padding-top: 30rpx;
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30rpx;
 }
 
-.cell{
-    padding: 30rpx ;
+.cell {
+    padding: 30rpx;
     text-align: left;
     color: #707070;
 }
 
-.other{
+.other {
     padding-top: 30rpx;
-padding-left:60rpx ;
-font-size: small;
-color: #707070;
+    padding-left: 60rpx;
+    font-size: small;
+    color: #707070;
 }

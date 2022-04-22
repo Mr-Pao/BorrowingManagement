@@ -1,5 +1,6 @@
 
 page {
+  --themeColor:#aa4d3d;
   --footer-height: 10vh;
   --button-size: 16vw;
   --button-color: #353535;
@@ -46,7 +47,7 @@ page {
   display: flex;
   border-top: lightgray solid 1px;
   color: white;
-  background-color: #aa4d3d;
+  background-color: var(--themeColor);
   font-size: large;
 }
 

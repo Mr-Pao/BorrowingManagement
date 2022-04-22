@@ -12,9 +12,9 @@
 
 <!-- Search -->
 <van-search 
-    value="{{ value }}" 
+    value="{{ search }}" 
     shape="round"
-    background="#aa4d3d"
+    background="var(--themeColor)"
     placeholder="请输入搜索关键词"
     bind:change="onChange"
     bind:search="onSearch"
@@ -39,7 +39,7 @@
 <!-- list -->
 <view class="box">
     <view class="kind">
-        <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
+        <van-sidebar active-key="{{ activeKey }}" bind:change="onSelect">
             <van-sidebar-item wx:for="{{kind}}" title="{{item}}" />
         </van-sidebar>
     </view>

@@ -11,7 +11,7 @@
         ". a1 a1 a2 a2 a2 ."
         ". a1 a1 a3 a3 a3 ."
         ". . . . . . .";
-    background-color: #aa4d3d;
+    background-color: var(--themeColor);
     box-shadow: 0rpx 0rpx 10rpx 10rpx #888;
 }
 
@@ -60,7 +60,7 @@
     width: 22%;
     margin-left: 30rpx;
     text-align: center;
-    border-left: 12rpx solid #aa4d3d;
+    border-left: 12rpx solid var(--themeColor);
     font-weight: 700;
 }
 
@@ -68,7 +68,7 @@
     float: right;
     line-height: 80rpx;
     font-size: 24rpx;
-    color: #aa4d3d;
+    color: var(--themeColor);
     margin-right: 30rpx;
 }
 
@@ -89,12 +89,12 @@
 .view_fengexian view {
     width: 25%;
     height: 4rpx;
-    background: linear-gradient(to right, #ead6ee, #aa4d3d);
+    background: linear-gradient(to right, #ead6ee, var(--themeColor));
 }
 
 .text_fengexian {
     font-size: 30rpx;
-    color: #aa4d3d;
+    color: var(--themeColor);
     margin: 0rpx 2% 0rpx 2%;
 }
 
