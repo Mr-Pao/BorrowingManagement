@@ -24,7 +24,7 @@ Page({
   // 根据 _id 值查询并显示数据
   async showDetail(e) {
     if (this.data.myBorrow[this.data.list_index].product.length > 0) {
-      const db = await getApp().database()
+      // const db = await getApp().database()
       // 根据 _id 值查询数据库中对应的待办事项
       db.collection('products').where({
         _id: this.data.myBorrow[this.data.list_index].product
@@ -70,8 +70,7 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: ['fy0obTxe8G4V3fM3V31py_y1oOzAYKpQbGMs1NMkUW4'],
       success(res) {
-        that.addreturn(),
-          that.sendOne()
+        that.addreturn()
       },
       fail(err) {
         console.log(err)

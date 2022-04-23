@@ -27,7 +27,6 @@
         <view class="myList_cell">
             <van-cell-group inset>
                 <view wx:for="{{myBorrow}}" wx:for-index="index" wx:if="{{item.borrow==1&&item.return==0}}" id="{{index}}" bindtap="goToReturn">
-                    <!-- <view wx:for="{{myBorrow}}" wx:for-index="index" wx:if="{{item.borrow==1&&item.return==0}}" id="{{item.product}}" bindtap="goToReturn"> -->
                     <van-cell icon="star-o" size="large" is-link title="{{item.borrowList[0].title}}" value="{{item.borrowTime}}" />
                 </view>
             </van-cell-group>

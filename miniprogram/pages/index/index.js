@@ -8,50 +8,109 @@ Page({
     hasMyBorrow: false,
   },
 
-  onLoad: function (options) {
+  async onLoad() {
+    //获取openid
+    let openid = await this.getOpenID()
+    //获取用户信息
+    let UserInfo = await this.getUserInfo(openid)
+    //判断管理员，获取所有借用信息
+    if (UserInfo.isManager) {
+      await this.getAllBorrow() 
+    }
+    //从数据库下载用户借用列表
+    let myBorrow = await this.getMyBorrow(openid)
+
     //获取物品分类
     this.getKind()
     //获取物品信息
     this.getProducts()
     // 检查是否需要更新
     this.checkForUpdates();
-    //获取openid
-    wx.cloud.callFunction({
-      name: 'getOpenId',
-      success: res => {
-        app.globalData.openid = res.result.openid
-        this.setData({
-          openid: app.globalData.openid
-        })
-        this.getUserInfo(res.result.openid) //从数据库下载用户信息
-        this.getMyBorrow(res.result.openid) //从数据库下载用户借用列表
-      }
-    })
   },
 
   onShow() {
-    //通过openid获取用户借用列表
+    //刷新用户信息和借用列表
     if (app.globalData.openid) {
       this.getUserInfo(app.globalData.openid)
       this.getMyBorrow(app.globalData.openid)
     }
   },
 
- //通过云函数获取物品分类
- getKind() {
-  wx.cloud.callFunction({
-    name: "getData",
-    data: {
-      dataName: "kind"
-    },
-    success: res => {
-      this.setData({
-        kind: res.result.data[0].kind
+  //获取用户openid
+  async getOpenID(obj) {
+    var that = this
+    return new Promise(function (resolve) {
+      wx.cloud.callFunction({
+        name: 'getOpenId',
+        success: function (res) {
+          resolve(res.result.openid)
+          that.setData({
+            openid: res.result.openid
+          })
+          app.globalData.openid = res.result.openid
+        }
+      });
+    });
+  },
+
+  //从数据库下载用户信息
+  async getUserInfo(openid) {
+    var that = this
+    return new Promise(function (resolve) {
+      db.collection('UserInfo').where({
+        _openid: openid,
+      }).get({
+        success: function (res) {
+          resolve(res.data[0])
+          if (res.data[0]) {
+            that.setData({
+              UserInfo: res.data[0],
+              hasUserInfo: true
+            })
+            app.globalData.UserInfo = res.data[0]
+          }
+        }
       })
-      app.globalData.kind = res.result.data[0].kind
-    }
-  })
-},
+    })
+  },
+
+  //获取借用列表，调用云函数lookup
+  async getMyBorrow(openid) {
+    var that = this
+    return new Promise(function (resolve) {
+      wx.cloud.callFunction({
+        name: 'lookup',
+        data: {
+          openid: openid
+        },
+        success: function (res) {
+          resolve(res.result.list)
+          app.globalData.myBorrow = res.result.list
+          that.setData({
+            myBorrow: res.result.list,
+            hasMyBorrow: true
+          })
+
+        }
+      })
+    })
+  },
+
+  //通过云函数获取物品分类
+  getKind() {
+    wx.cloud.callFunction({
+      name: "getData",
+      data: {
+        dataName: "kind"
+      },
+      success: res => {
+        this.setData({
+          kind: res.result.data[0].kind
+        })
+        app.globalData.kind = res.result.data[0].kind
+      }
+    })
+  },
 
   //通过云函数获取所有物品
   getProducts() {
@@ -69,7 +128,8 @@ Page({
     })
   },
 
-  //获取用户昵称和头像
+
+  //获取并存储用户昵称和头像
   getUserProfile(e) {
     wx.getUserProfile({
       desc: '用于完善资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
@@ -78,8 +138,6 @@ Page({
       }
     })
   },
-
-  //存储用户昵称和头像
   saveUserProfile(res) {
     db.collection("UserInfo").doc(app.globalData.openid).set({
       data: {
@@ -89,45 +147,6 @@ Page({
       success: res => {
         this.onShow()
         this.onLoad()
-      }
-    })
-  },
-
-  //从数据库下载用户信息
-  getUserInfo(openid) {
-    db.collection('UserInfo').where({
-      _openid: openid,
-    }).get({
-      success: res => {
-        if (res.data != '') {
-          this.setData({
-            UserInfo: res.data[0],
-            hasUserInfo: true
-          })
-          //判断管理员
-          if (res.data[0].isManager) {
-            this.getAllBorrow()
-          }
-          app.globalData.UserInfo = res.data[0]
-        }
-
-      }
-    })
-  },
-
-  //获取借用列表，调用云函数lookup
-  getMyBorrow() {
-    wx.cloud.callFunction({
-      name: 'lookup',
-      data: {
-        openid: app.globalData.openid
-      },
-      complete: res => {
-        this.setData({
-          myBorrow: res.result.list,
-          hasMyBorrow: true
-        })
-        app.globalData.myBorrow = res.result.list
       }
     })
   },
@@ -153,7 +172,6 @@ Page({
 
   //跳转归还
   goToReturn: function (e) {
-    console.log(e)
     wx.navigateTo({
       url: '/pages/return/index?list_id=' + e.currentTarget.id,
     })
@@ -161,7 +179,6 @@ Page({
 
   //确认借用申请
   goToBorrowConfirm: function (e) {
-    console.log(this.data.allBorrow[e.currentTarget.id]._id)
     db.collection("borrow").where({ //修改物品状态为借用
       _id: this.data.allBorrow[e.currentTarget.id]._id
     }).update({
@@ -171,14 +188,11 @@ Page({
         returnRequest: 0,
         return: 0,
       },
-      success: function (res) {
-        console.log(res.data)
-      }
     })
     wx.showToast({
       title: '已确认',
     })
-    this.onShow()
+    this.onLoad()
     wx.cloud.callFunction({ //发送申请通过通知
       name: "borrowAgree",
       data: {
@@ -186,8 +200,6 @@ Page({
         title: this.data.allBorrow[e.currentTarget.id].borrowList[0].title,
         userName: this.data.allBorrow[e.currentTarget.id].userName
       }
-    }).then(res => {
-      console.log(res)
     })
   },
 
@@ -206,7 +218,7 @@ Page({
       wx.showToast({
         title: '已确认',
       })
-      this.onShow()
+      this.onLoad()
     })
     wx.cloud.callFunction({ //发送申请通过通知
       name: "returnAgree",
@@ -214,8 +226,6 @@ Page({
         openid: this.data.allBorrow[e.currentTarget.id].openid,
         title: this.data.allBorrow[e.currentTarget.id].borrowList[0].title
       }
-    }).then(res => {
-      console.log(res)
     })
   },
 
@@ -223,7 +233,6 @@ Page({
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading(); //在标题栏中显示加载图标
     if (this.data.openid) {
-      this.onShow()
       this.onLoad()
       wx.hideNavigationBarLoading(); //完成停止加载图标
       wx.stopPullDownRefresh();
@@ -244,6 +253,7 @@ Page({
     }
   },
 
+  //检查版本更新
   checkForUpdates: function () {
     const updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {

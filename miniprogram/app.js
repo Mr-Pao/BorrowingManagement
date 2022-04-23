@@ -45,10 +45,6 @@ App({
     }
   },
 
-  // 获取云数据库实例
-  async database() {
-    return (await this.cloud()).database()
-  },
 })
 
 

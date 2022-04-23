@@ -24,7 +24,7 @@ Page({
     // 根据 _id 值查询并显示数据
     async showDetail(e) {
         if (this.data.list_id.length > 0) {
-            const db = await getApp().database()
+            // const db = await getApp().database()
             // 根据 _id 值查询数据库中对应的待办事项
             db.collection('products').where({
                 _id: this.data.list_id
@@ -68,7 +68,7 @@ Page({
     //借用响应
     borrow(e) {
         var that = this
-        if (this.data.UserInfo.name != '' && this.data.UserInfo.tel != '') {
+        if (this.data.UserInfo.name && this.data.UserInfo.tel ) {
             wx.requestSubscribeMessage({
                 tmplIds: ['9tv28UFh_-9rl6P6w68_AWFSzi0nLQ9S3NgNy44tQog'],
                 success(res) {
