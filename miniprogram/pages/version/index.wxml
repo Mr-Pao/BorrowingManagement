@@ -1,0 +1,43 @@
+<!--pages/version/index.wxml-->
+<view class="form-group">
+<view class="image">
+        <image src="../../images/2.gif" mode="widthFix" style="width: 40%;"></image>
+    </view>
+</view>
+
+<view class="form-group">
+    <view class="title">1.7</view>
+    <view class="desc">新增：搜索功能</view>
+    <view class="desc">新增：版本记录界面</view>
+    <view class="desc">优化：代码结构</view>
+    
+    <view class="title">1.6</view>
+    <view class="desc">新增：关于界面</view>
+    <view class="desc">新增：客服功能</view>
+    
+    <view class="title">1.5</view>
+    <view class="desc">新增：检查版本更新</view>
+    
+    <view class="title">1.4</view>
+    <view class="desc">新增：获取并保存用户信息</view>
+    <view class="desc">优化：物品详情界面</view>
+    <view class="desc">优化：登录逻辑</view>
+    
+    <view class="title">1.3</view>
+    <view class="desc">新增：管理员界面</view>
+    <view class="desc">新增：借用与归还添加申请环节</view>
+    
+    <view class="title">1.2</view>
+    <view class="desc">新增：物品分类</view>
+    <view class="desc">优化：导入物品数据库</view>
+    <view class="desc">bug修复：进入小程序时直接显示所有借用列表</view>
+
+    <view class="title">1.1</view>
+    <view class="desc">新增：借用与归还提醒功能</view>
+    <view class="desc">优化：数据库</view>
+    <view class="desc">bug修复：多次授权</view>
+    <view class="desc">bug修复：已借用物品详情页无法显示</view>
+    
+    <view class="title">1.0</view>
+    <view class="desc">实现基本借用与归还功能</view>
+</view>

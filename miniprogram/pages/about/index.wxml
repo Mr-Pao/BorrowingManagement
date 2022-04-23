@@ -1,7 +1,7 @@
 <!--pages/about/index.wxml-->
 <view class="form-group">
     <view class="title">Version</view>
-    <view class="desc">1.7.0</view>
+    <view class="desc" bindtap="version">1.7.0</view>
     <view class="title">Developer</view>
     <view class="desc">一只狍</view>
     <view class="title">Wechat</view>
