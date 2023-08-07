@@ -1,6 +1,6 @@
 // pages/list/index.js
-const db = wx.cloud.database();
-const app = getApp();
+const app = getApp()
+const cloud = app.globalData.cloud
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 
 Page({
@@ -8,9 +8,13 @@ Page({
     activeKey: 0,
     search: '',
   },
-  onLoad: function (options) {
-    this.getNoticeList()
-    this.getPhotoList()
+
+  async onLoad (options) {
+    const res = await cloud.invoke('MyTools-Love') // test5 为云函数名
+    console.log(res)     // 这里的 res 是云函数中 return 的内容
+
+    // this.getNoticeList()
+    // this.getPhotoList()
     this.setData({
       products: app.globalData.products,
       kind: app.globalData.kind

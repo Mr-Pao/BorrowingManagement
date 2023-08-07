@@ -40,7 +40,7 @@
 <view class="box">
     <view class="kind">
         <van-sidebar active-key="{{ activeKey }}" bind:change="onSelect">
-            <van-sidebar-item wx:for="{{kind}}" title="{{item}}" />
+            <van-sidebar-item wx:for="{{kind}}" title="{{item.name}}" />
         </van-sidebar>
     </view>
     <view class="list">

@@ -3,14 +3,15 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.10.2",
-    "uview-ui": "^2.0.30",
-    "weui-miniprogram": "^1.0.8"
+    "@vant/weapp": "^1.10.23",
+    "laf-client-sdk": "^1.0.0-beta.10"
   },
-  "description": "这是使用云开发能力构建的待办事项小程序模板，其中演示了云开发三大基础能力的使用："
+  "description": "由于原使用的记录小程序疯狂弹广告，所以自己开发一个φ(*￣0￣)",
+  "keywords": [],
+  "devDependencies": {}
 }

@@ -1,6 +1,6 @@
 // pages/search/search.js
-const db = wx.cloud.database();
-const app = getApp();
+const app = getApp()
+const cloud = app.globalData.cloud
 
 Page({
 

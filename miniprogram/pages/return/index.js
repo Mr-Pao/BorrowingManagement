@@ -1,5 +1,5 @@
-const db = wx.cloud.database()
-const app = getApp();
+const app = getApp()
+const cloud = app.globalData.cloud
 var times = require('../times.js');
 Page({
 
