@@ -1,10 +1,9 @@
 <!--pages/index/index.wxml-->
 
 <!-- UserInfo -->
-<view>
+<!-- <view>
     <view wx:if="{{!hasUserInfo}}">
         <button bindtap="getUserProfile">授权登录</button>
-        <!-- <button bindtap="getUserProfile" > 授权登录 </button> -->
     </view>
     <view wx:else bindtap="goToUserInfo" class="userInfo">
         <image class="userInfo-avatar" src="{{UserInfo.avatarUrl}}" mode="widthFix"></image>
@@ -14,6 +13,19 @@
             <text wx:else>✏️请登记信息</text>
         </view>
     </view>
+</view> -->
+
+<view class="userInfo">
+  <button class="userInfo-avatar" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar" src="{{avatarUrl}}" mode="widthFix"></image>
+  </button> 
+  <mp-form>
+    <mp-cells>
+      <mp-cell title="昵称">
+        <input type="nickname" class="userInfo-nickname" placeholder="请输入昵称"/>
+      </mp-cell>
+    </mp-cells>
+  </mp-form>
 </view>
 
 
