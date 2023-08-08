@@ -1,6 +1,9 @@
 // pages/list/index.js
 const app = getApp()
 const cloud = app.globalData.cloud
+
+const db = cloud.database()
+
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 
 Page({
@@ -91,7 +94,7 @@ Page({
   },
   onSearch() {
     var that = this
-    db.collection('products').where({ //使用正则查询，实现对搜索的模糊查询
+    db.collection('BorrowingManagement_products').where({ //使用正则查询，实现对搜索的模糊查询
       title: db.RegExp({
         regexp: this.data.value, //从搜索栏中获取的value作为规则进行匹配。
         options: 'i' //大小写不区分

@@ -2,6 +2,8 @@
 const app = getApp()
 const cloud = app.globalData.cloud
 
+const db = cloud.database()
+
 Page({
 
 

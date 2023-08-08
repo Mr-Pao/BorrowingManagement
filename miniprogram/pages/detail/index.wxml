@@ -1,6 +1,8 @@
 <view class="form-group">
     <view class="form-cell">
-        <view class="form-cell_picture" wx:if="{{detail.picture}}"><image src="{{detail.picture}}" mode="widthFix"/></view>
+        <view class="form-cell_picture" wx:if="{{detail.picture}}">
+            <image src="{{detail.picture}}" mode="widthFix" />
+        </view>
         <view class="form-cell_title">{{detail.title}}</view>
         <view class="form-cell_desc">{{detail.desc}}</view>
     </view>
@@ -19,6 +21,16 @@
     </view>
 </view>
 
-<view class="footer" >
-    <view bindtap="borrow">申请借用</view>
+<view class="footer">
+    <view is-link bindtap="showPopup">申请借用</view>
+    <van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" bind:close="onClose">
+        <van-cell-group>
+            <van-field value="{{ borrow_num }}" label="数量" bind:change="onChange_num" />
+            <van-field value="{{ user_name }}" label="姓名" placeholder="请输入" bind:change="onChange_name" />
+            <van-field value="{{ uese_tel }}" label="电话" placeholder="请输入" bind:change="onChange_tel" />
+        </van-cell-group>
+        <view class="footer">
+            <view bindtap="borrow">申请借用</view>
+        </view>
+    </van-popup>
 </view>

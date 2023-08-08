@@ -39,7 +39,7 @@
         <view class="myList_cell">
             <van-cell-group inset>
                 <view wx:for="{{myBorrow}}" wx:for-index="index" wx:if="{{item.borrow==1&&item.return==0}}" id="{{index}}" bindtap="goToReturn">
-                    <van-cell icon="star-o" size="large" is-link title="{{item.borrowList[0].title}}" value="{{item.borrowTime}}" />
+                    <van-cell icon="star-o" size="large" is-link title="{{item.product_name}}" value="{{item.borrowTime}}" />
                 </view>
             </van-cell-group>
         </view>
@@ -50,7 +50,7 @@
 <!-- 以下为管理者界面 -->
 
 <!-- 借用申请 -->
-<view wx:if="{{UserInfo.isManager}}">
+<view>
     <view class="view_fengexian">
         <view></view>
         <text class="text_fengexian">以下为管理员界面</text>
@@ -64,7 +64,7 @@
         <view class="myList_cell">
             <van-cell-group inset>
                 <view wx:for="{{allBorrow}}" wx:for-index="index" wx:if="{{item.borrowRequest==1}}" id="{{index}}" bindtap="goToBorrowConfirm">
-                    <van-cell size="large" title="{{item.borrowList[0].title}}" value="{{item.userName}}" />
+                    <van-cell size="large" title="{{item.product_name}}" value="{{item.user_name}}" />
                 </view>
             </van-cell-group>
         </view>
@@ -78,7 +78,7 @@
         <view class="myList_cell">
             <van-cell-group inset>
                 <view wx:for="{{allBorrow}}" wx:for-index="index" wx:if="{{item.returnRequest==1}}" id="{{index}}" bindtap="goToReturnConfirm">
-                    <van-cell size="large" title="{{item.borrowList[0].title}}" value="{{item.userName}}" />
+                    <van-cell size="large" title="{{item.product_name}}" value="{{item.userName}}" />
                 </view>
             </van-cell-group>
         </view>
@@ -92,7 +92,7 @@
         <view class="myList_cell">
             <van-cell-group inset>
                 <view wx:for="{{allBorrow}}" wx:for-index="index" wx:if="{{item.borrow==1}}" id="{{index}}">
-                    <van-cell size="large" title="{{item.borrowList[0].title}}" value="{{item.userName}}" />
+                    <van-cell size="large" title="{{item.product_name}}" value="{{item.userName}}" />
                 </view>
             </van-cell-group>
         </view>
