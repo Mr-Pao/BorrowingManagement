@@ -34,10 +34,10 @@ Page({
 
     onShow() {
         //刷新用户信息和借用列表
-        // if (app.globalData.openid) {
-        //     this.getUserInfo(app.globalData.openid)
-        //     this.getMyBorrow(app.globalData.openid)
-        // }
+        if (app.globalData.openid) {
+            this.getUserInfo(app.globalData.openid)
+            this.getMyBorrow(app.globalData.openid)
+        }
     },
 
     // 获取用户openid
@@ -78,14 +78,32 @@ Page({
         });
     },
 
-
-    //获取用户头像
-    async onChooseAvatar(e) {
-        const {
-            avatarUrl
-        } = e.detail
+    //存储用户openid
+    saveUserProfile(res) {
+        db.collection("BorrowingManagement_UserInfo").set({
+            data: {
+                avatarUrl: res.userInfo.avatarUrl,
+                nickName: res.userInfo.nickName
+            },
+            success: res => {
+                this.onShow()
+                this.onLoad()
+            }
+        })
+    },
+    //获取并存储用户昵称
+    onChange_name(event) {
+        // event.detail 为当前输入的值
+        console.log(event.detail);
         this.setData({
-            avatarUrl,
+            user_name: event.detail
+        })
+    },
+
+    //获取并存储用户头像
+    async onChooseAvatar(event) {
+        this.setData({
+            avatarUrl: event.detail,
         })
     },
 
@@ -94,7 +112,7 @@ Page({
     async getUserInfo(openid) {
         var that = this
         return new Promise(function (resolve) {
-            db.collection('UserInfo').where({
+            db.collection('BorrowingManagement_UserInfo').where({
                 _openid: openid,
             }).get({
                 success: function (res) {
@@ -111,6 +129,9 @@ Page({
         })
     },
 
+
+
+
     //获取借用列表
     async getMyBorrow(openid) {
         const res = await db.collection("BorrowingManagement_allBorrow").where({
@@ -119,6 +140,7 @@ Page({
         this.setData({
             myBorrow: res.data
         })
+        app.globalData.myBorrow = res.data
     },
 
     //通过云函数获取物品分类
@@ -140,27 +162,7 @@ Page({
     },
 
 
-    //获取并存储用户昵称和头像
-    getUserProfile(e) {
-        wx.getUserProfile({
-            desc: '用于完善资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-            success: (res) => {
-                this.saveUserProfile(res)
-            }
-        })
-    },
-    saveUserProfile(res) {
-        db.collection("UserInfo").doc(app.globalData.openid).set({
-            data: {
-                avatarUrl: res.userInfo.avatarUrl,
-                nickName: res.userInfo.nickName
-            },
-            success: res => {
-                this.onShow()
-                this.onLoad()
-            }
-        })
-    },
+
 
     //获取所有借用
     async getAllBorrow() {

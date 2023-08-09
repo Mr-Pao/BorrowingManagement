@@ -22,7 +22,7 @@
   <mp-form>
     <mp-cells>
       <mp-cell title="昵称">
-        <input type="nickname" class="userInfo-nickname" placeholder="请输入昵称"/>
+        <input type="nickname" class="userInfo-nickname" placeholder="请输入昵称" bind:change="onChange_name"/>
       </mp-cell>
     </mp-cells>
   </mp-form>

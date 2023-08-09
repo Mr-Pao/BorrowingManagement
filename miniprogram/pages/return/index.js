@@ -1,5 +1,8 @@
 const app = getApp()
 const cloud = app.globalData.cloud
+
+const db = cloud.database()
+
 var times = require('../times.js');
 Page({
 
@@ -23,12 +26,13 @@ Page({
 
   // 根据 _id 值查询并显示数据
   async showDetail(e) {
-    if (this.data.myBorrow[this.data.list_index].product.length > 0) {
+    if (this.data.myBorrow[this.data.list_index].product_id.length > 0) {
       // const db = await getApp().database()
       // 根据 _id 值查询数据库中对应的待办事项
-      db.collection('products').where({
-        _id: this.data.myBorrow[this.data.list_index].product
+      db.collection('BorrowingManagement_products').where({
+        _id: this.data.myBorrow[this.data.list_index].product_id
       }).get().then(res => {
+          console.log(res)
         // 解包获得待办事项
         const {
           data: [detail]
