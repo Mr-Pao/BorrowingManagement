@@ -20,8 +20,8 @@ Page({
         let myBorrow = await this.getMyBorrow(openid)
         //获取用户信息
         // let UserInfo = await this.getUserInfo(openid)
-        //判断管理员，获取所有借用信息
-        let allBorrow = await this.getAllBorrow()
+        //获取所有借用信息
+        this.getAllBorrow()
 
 
         //获取物品分类
@@ -213,7 +213,7 @@ Page({
 
     //确认归还申请
     goToReturnConfirm: function (e) {
-        db.collection("borrow").where({ //修改物品状态为归还
+        db.collection("BorrowingManagement_allBorrow").where({ //修改物品状态为归还
             _id: this.data.allBorrow[e.currentTarget.id]._id
         }).update({
             borrowRequest: 0,

@@ -83,17 +83,15 @@ Page({
   },
   addreturn() {
     var that = this
-    db.collection("borrow").where({
+    db.collection("BorrowingManagement_allBorrow").where({
         _id: that.data.myBorrow[that.data.list_index]._id
       })
       .update({
-        data: {
           returnTime: this.data.returnTime,
           borrowRequest: 0,
           borrow: 1,
           returnRequest: 1,
           return: 0
-        }
       })
       .then(res => {
         wx.showToast({
